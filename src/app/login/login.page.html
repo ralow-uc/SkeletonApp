@@ -1,61 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<mat-toolbar color="primary">
+  <span>Login</span>
+</mat-toolbar>
 
-<ion-content [fullscreen]="true">
-  <div class="login-container">
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input
-          type="email"
-          [(ngModel)]="email"
-          name="email"
-          required
-          email
-          #emailInput="ngModel"
-        ></ion-input>
-      </ion-item>
-      <ion-note
-        *ngIf="emailInput.touched && emailInput.errors?.['required']"
-        color="danger"
-      >
-        El correo es requerido.
-      </ion-note>
-      <ion-note
-        *ngIf="emailInput.touched && emailInput.errors?.['email']"
-        color="danger"
-      >
-        El formato del correo no es válido.
-      </ion-note>
+<div class="login-wrapper" #loginWrapper>
+  <form (ngSubmit)="onSubmit()" novalidate class="login-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Usuario</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        required
+        minlength="3"
+        maxlength="8"
+      />
+    </mat-form-field>
 
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          required
-          #passwordInput="ngModel"
-        ></ion-input>
-      </ion-item>
-      <ion-note
-        *ngIf="passwordInput.invalid && passwordInput.touched"
-        color="danger"
-      >
-        La contraseña es requerida.
-      </ion-note>
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input
+        matInput
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        maxlength="4"
+        inputmode="numeric"
+      />
+    </mat-form-field>
 
-      <ion-button
-        expand="block"
-        type="submit"
-        class="ion-margin-top login-button"
-        [disabled]="loginForm.invalid"
-      >
-        Iniciar sesión
-      </ion-button>
-    </form>
-  </div>
-</ion-content>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="login-button"
+    >
+      Ingresar
+    </button>
+  </form>
+</div>

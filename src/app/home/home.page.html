@@ -1,0 +1,50 @@
+<mat-toolbar color="primary">
+  <span #tituloHome>Bienvenido, {{ username }}</span>
+</mat-toolbar>
+
+<div class="home-wrapper">
+  <div class="material-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="nombre" #nombreInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido</mat-label>
+      <input matInput [(ngModel)]="apellido" #apellidoInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nivel de educación</mat-label>
+      <mat-select [(ngModel)]="nivel" name="nivel">
+        <mat-option
+          *ngFor="let nivelOption of nivelesEducacion"
+          [value]="nivelOption"
+        >
+          {{ nivelOption }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="custom-datepicker">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="fechaNacimiento"
+        name="fechaNacimiento"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="buttons">
+      <button mat-raised-button color="accent" (click)="limpiar()">
+        Limpiar
+      </button>
+      <button mat-raised-button color="primary" (click)="mostrar()">
+        Mostrar
+      </button>
+    </div>
+  </div>
+</div>

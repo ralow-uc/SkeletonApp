@@ -1,15 +1,20 @@
-.login-container {
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px);
+  padding: 0 16px;
+}
+
+.login-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  padding: 0 20px;
+  gap: 20px;
+  width: 100%;
 }
 
 .login-button {
-  margin: 30px 10px;
-}
-
-ion-note {
-  margin: 0 18px;
+  align-self: center;
+  width: 100%;
+  max-width: 300px;
 }

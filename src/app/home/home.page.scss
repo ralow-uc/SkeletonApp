@@ -1,0 +1,19 @@
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 64px);
+  padding: 0 16px;
+}
+
+.material-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
