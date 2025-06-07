@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <span>Menú de Cubos</span>
+</mat-toolbar>
+
+<div class="cubes-container">
+  <mat-card *ngFor="let cube of cubes" class="cube-card" (click)="goToCube(cube.id)">
+    <img mat-card-image [src]="cube.image" alt="{{ cube.name }}" />
+    <mat-card-title>{{ cube.name }}</mat-card-title>
+  </mat-card>
+</div>

@@ -1,0 +1,17 @@
+.timer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.timer-display h1 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.timer-display p {
+  font-size: 1.5rem;
+  color: gray;
+}

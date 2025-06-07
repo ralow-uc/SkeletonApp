@@ -1,0 +1,20 @@
+.cube-detail-container {
+  padding: 16px;
+  text-align: center;
+
+  img {
+    width: 200px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #333;
+  }
+}
+
+.error-message {
+  padding: 24px;
+  text-align: center;
+  color: red;
+}

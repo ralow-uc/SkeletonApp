@@ -9,8 +9,36 @@ const routes: Routes = [
     children: [
       {
         path: "tab1",
-        loadChildren: () =>
-          import("../tab1/tab1.module").then((m) => m.Tab1PageModule),
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../cubes-menu/cubes-menu.module").then(
+                (m) => m.CubesMenuPageModule
+              ),
+          },
+          {
+            path: ":cubeId",
+            loadChildren: () =>
+              import("../cube-detail/cube-detail.module").then(
+                (m) => m.CubeDetailPageModule
+              ),
+          },
+          {
+            path: ":cubeId/:setId",
+            loadChildren: () =>
+              import("../cube-set-detail/cube-set-detail.module").then(
+                (m) => m.CubeSetDetailPageModule
+              ),
+          },
+          {
+            path: ":cubeId/:setId/:algId",
+            loadChildren: () =>
+              import("../alg-detail/alg-detail.module").then(
+                (m) => m.AlgDetailPageModule
+              ),
+          },
+        ],
       },
       {
         path: "tab2",
@@ -20,7 +48,7 @@ const routes: Routes = [
       {
         path: "tab3",
         loadChildren: () =>
-          import("../tab3/tab3.module").then((m) => m.Tab3PageModule),
+          import("../tab1/tab1.module").then((m) => m.Tab1PageModule),
       },
       {
         path: "",

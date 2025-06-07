@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <span>{{ setData?.name || 'Set de algoritmos' }}</span>
+</mat-toolbar>
+
+<mat-card *ngFor="let case of setData.cases" class="case-card" (click)="goToAlgorithm(case.id)">
+  <mat-card-title>{{ case.name }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ case.notation }}</p>
+    <img *ngIf="case.image" [src]="case.image" alt="{{ case.name }}" />
+  </mat-card-content>
+</mat-card>

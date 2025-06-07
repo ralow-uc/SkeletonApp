@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <span>{{ algData?.name || 'Algoritmo' }}</span>
+</mat-toolbar>
+
+<div class="alg-detail-container" *ngIf="algData">
+  <h3>Algoritmos:</h3>
+  <ul>
+    <li *ngFor="let notation of algData.algs">
+      <code>{{ notation }}</code>
+    </li>
+  </ul>
+  <img *ngIf="algData.image" [src]="algData.image" alt="{{ algData.name }}" />
+</div>
