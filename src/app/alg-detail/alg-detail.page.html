@@ -1,13 +1,34 @@
 <mat-toolbar color="primary">
   <span>{{ algData?.name || 'Algoritmo' }}</span>
+  <span class="spacer"></span>
+  <button mat-button color="accent" (click)="toggleInput()">
+    <span>{{ showInput ? 'Cerrar' : 'Agregar Alg' }}</span>
+    <mat-icon>{{ showInput ? 'close' : 'add' }}</mat-icon>
+  </button>
 </mat-toolbar>
 
 <div class="alg-detail-container" *ngIf="algData">
-  <h3>Algoritmos:</h3>
-  <ul>
-    <li *ngFor="let notation of algData.algs">
-      <code>{{ notation }}</code>
-    </li>
-  </ul>
-  <img *ngIf="algData.image" [src]="algData.image" alt="{{ algData.name }}" />
+  <form
+    #formEl
+    [hidden]="!showInput"
+    (submit)="addAlgorithm(); $event.preventDefault();"
+    class="alg-form"
+  >
+    <mat-form-field appearance="outline" class="alg-input">
+      <mat-label>Algoritmo</mat-label>
+      <input matInput [(ngModel)]="newAlg" name="newAlg" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Agregar</button>
+  </form>
+
+  <div class="alg-detail-content" [class.shifted]="showInput">
+    <img *ngIf="algData.image" [src]="algData.image" alt="{{ algData.name }}" />
+
+    <h3 class="ion-margin-top">Algoritmos:</h3>
+    <ul>
+      <li *ngFor="let notation of algData.algs">
+        <code>{{ notation }}</code>
+      </li>
+    </ul>
+  </div>
 </div>

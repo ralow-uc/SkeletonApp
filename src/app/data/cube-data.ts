@@ -28,13 +28,13 @@ export const allCubes: Record<CubeId, CubeData> = {
         cases: [
           {
             id: "1",
-            name: "1",
+            name: "OLL 1",
             image: "assets/3x3/oll/OLL-01.png",
             algs: ["U R U' R'", "y U R U2 R' U' R"],
           },
           {
             id: "2",
-            name: "2",
+            name: "OLL 2",
             image: "assets/3x3/oll/OLL-02.png",
             algs: ["y' U2 R U R' U", "R' F R F'"],
           },
