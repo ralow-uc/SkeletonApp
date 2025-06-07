@@ -38,6 +38,66 @@ export const allCubes: Record<CubeId, CubeData> = {
             image: "assets/3x3/oll/OLL-02.png",
             algs: ["y' U2 R U R' U", "R' F R F'"],
           },
+          {
+            id: "3",
+            name: "OLL 3",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "4",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "5",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "6",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "7",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "8",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "9",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "10",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "11",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
+          {
+            id: "12",
+            name: "OLL 2",
+            image: "assets/3x3/oll/OLL-02.png",
+            algs: ["y' U2 R U R' U", "R' F R F'"],
+          },
         ],
       },
     ],
@@ -45,6 +105,7 @@ export const allCubes: Record<CubeId, CubeData> = {
   "sq1": {
     name: "Square-1",
     image: "assets/square-1.jpg",
-    sets: [],
+    sets: [
+    ],
   },
 };

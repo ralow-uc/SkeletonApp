@@ -25,11 +25,29 @@ export class CubeSetDetailPage {
     }
   }
 
-goToAlgorithm(algId: string) {
-  this.router.navigate(["/tabs", "tab1", this.cubeId, this.setId, algId], {
-    state: {
-      allCubes: this.allCubes
+  goToAlgorithm(algId: string) {
+    this.router.navigate(["/tabs", "tab1", this.cubeId, this.setId, algId], {
+      state: {
+        allCubes: this.allCubes,
+      },
+    });
+  }
+
+  getPreviewAlg(caseId: string, fallbackAlgs: string[]): string {
+    const storageKey = `alg-${this.cubeId}-${this.setId}-${caseId}`;
+    const saved = localStorage.getItem(storageKey);
+
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed?.algs?.length) {
+          return parsed.algs[0];
+        }
+      } catch (e) {
+        console.warn("Error al parsear localStorage", e);
+      }
     }
-  });
-}
+
+    return fallbackAlgs[0] || "";
+  }
 }

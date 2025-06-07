@@ -16,3 +16,48 @@
   padding: 32px;
   color: red;
 }
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 56px);
+  box-sizing: border-box;
+}
+
+.case-card {
+  cursor: pointer;
+}
+
+.case-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 56px;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  overflow-y: auto;
+  padding: 16px;
+  align-items: start;
+}
+
+mat-toolbar {
+  padding: 16px;
+}
+
+mat-card-title {
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+}
+
+mat-card-content p {
+  text-align: center;
+}
