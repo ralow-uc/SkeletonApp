@@ -22,12 +22,46 @@
   </form>
 
   <div class="alg-detail-content" [class.shifted]="showInput">
-    <img *ngIf="algData.image" [src]="algData.image" alt="{{ algData.name }}" />
+    <img
+      *ngIf="isString(algData.image)"
+      [src]="algData.image"
+      alt="{{ algData.name }}"
+    />
+    <ng-container *ngIf="isArray(algData.image)">
+      <img
+        *ngFor="let img of algData.image"
+        [src]="img"
+        [alt]="algData.name"
+        class="multi-image"
+      />
+    </ng-container>
 
     <h3 class="ion-margin-top">Algoritmos:</h3>
     <ul>
-      <li *ngFor="let notation of algData.algs">
-        <code>{{ notation }}</code>
+      <li *ngFor="let notation of algData.algs; let i = index">
+        <p class="alg-line">
+          {{ notation }}
+          <span class="alg-actions">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="toggleFavorite(notation)"
+            >
+              <mat-icon>
+                {{ isFavorite(notation) ? 'star' : 'star_border' }}
+              </mat-icon>
+            </button>
+
+            <button
+              *ngIf="isCustomAlg(notation)"
+              mat-icon-button
+              color="warn"
+              (click)="removeAlgorithm(notation)"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </span>
+        </p>
       </li>
     </ul>
   </div>

@@ -34,20 +34,34 @@ export class CubeSetDetailPage {
   }
 
   getPreviewAlg(caseId: string, fallbackAlgs: string[]): string {
-    const storageKey = `alg-${this.cubeId}-${this.setId}-${caseId}`;
-    const saved = localStorage.getItem(storageKey);
+    const favKey = `alg-fav-${this.cubeId}-${this.setId}-${caseId}`;
+    const favSaved = localStorage.getItem(favKey);
+    if (favSaved) {
+      return favSaved;
+    }
 
-    if (saved) {
+    const customKey = `alg-custom-${this.cubeId}-${this.setId}-${caseId}`;
+    const customSaved = localStorage.getItem(customKey);
+
+    if (customSaved) {
       try {
-        const parsed = JSON.parse(saved);
-        if (parsed?.algs?.length) {
-          return parsed.algs[0];
+        const customAlgs: string[] = JSON.parse(customSaved);
+        if (customAlgs.length > 0) {
+          return customAlgs[0];
         }
       } catch (e) {
-        console.warn("Error al parsear localStorage", e);
+        console.warn("Error al parsear customAlgs", e);
       }
     }
 
     return fallbackAlgs[0] || "";
+  }
+
+  isString(value: any): value is string {
+    return typeof value === "string";
+  }
+
+  isArray(value: any): value is string[] {
+    return Array.isArray(value);
   }
 }

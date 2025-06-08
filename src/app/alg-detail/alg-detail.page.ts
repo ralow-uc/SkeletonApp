@@ -14,6 +14,8 @@ export class AlgDetailPage {
   algData: any;
   newAlg = "";
   showInput = false;
+  originalAlgs: string[] = [];
+  favoriteAlg: string | null = null;
 
   @ViewChild("formEl") formEl!: ElementRef;
 
@@ -25,24 +27,58 @@ export class AlgDetailPage {
     this.loadData();
   }
 
-  loadData() {
-    const storageKey = `alg-${this.cubeId}-${this.setId}-${this.algId}`;
-    const saved = localStorage.getItem(storageKey);
+  ngOnInit() {
+    this.loadFavorites();
+  }
 
-    if (saved) {
-      this.algData = JSON.parse(saved);
+  loadFavorites() {
+    const key = this.getFavoriteStorageKey();
+    const saved = localStorage.getItem(key);
+    this.favoriteAlg = saved ?? null;
+  }
+
+  toggleFavorite(alg: string) {
+    const favKey = `alg-fav-${this.cubeId}-${this.setId}-${this.algId}`;
+
+    if (this.favoriteAlg === alg) {
+      this.favoriteAlg = null;
+      localStorage.removeItem(favKey);
     } else {
-      const allCubes = history.state.allCubes;
+      this.favoriteAlg = alg;
+      localStorage.setItem(favKey, alg);
+    }
+  }
 
-      if (allCubes?.[this.cubeId]) {
-        const set = allCubes[this.cubeId].sets.find(
-          (s: any) => s.id === this.setId
-        );
-        this.algData = set?.cases.find((a: any) => a.id === this.algId);
+  isFavorite(alg: string): boolean {
+    return this.favoriteAlg === alg;
+  }
 
-        localStorage.setItem(storageKey, JSON.stringify(this.algData));
+  getFavoriteStorageKey(): string {
+    return `alg-fav-${this.cubeId}-${this.setId}-${this.algId}`;
+  }
+
+  loadData() {
+    const allCubes = history.state.allCubes;
+
+    if (allCubes?.[this.cubeId]) {
+      const set = allCubes[this.cubeId].sets.find(
+        (s: any) => s.id === this.setId
+      );
+      const caseData = set?.cases.find((a: any) => a.id === this.algId);
+
+      if (caseData) {
+        this.originalAlgs = [...caseData.algs]; // guarda los originales
+        const storageKey = `alg-custom-${this.cubeId}-${this.setId}-${this.algId}`;
+        const saved = localStorage.getItem(storageKey);
+        const customAlgs: string[] = saved ? JSON.parse(saved) : [];
+
+        this.algData = {
+          ...caseData,
+          algs: [...customAlgs, ...this.originalAlgs],
+        };
       }
     }
+    this.loadFavorites();
   }
 
   toggleInput() {
@@ -81,11 +117,47 @@ export class AlgDetailPage {
   addAlgorithm() {
     if (!this.newAlg.trim()) return;
 
-    this.algData.algs.unshift(this.newAlg.trim());
+    const storageKey = `alg-custom-${this.cubeId}-${this.setId}-${this.algId}`;
+    const existing = localStorage.getItem(storageKey);
+    const customAlgs: string[] = existing ? JSON.parse(existing) : [];
 
-    const storageKey = `alg-${this.cubeId}-${this.setId}-${this.algId}`;
-    localStorage.setItem(storageKey, JSON.stringify(this.algData));
+    customAlgs.unshift(this.newAlg.trim());
+    localStorage.setItem(storageKey, JSON.stringify(customAlgs));
 
+    this.algData.algs = [...customAlgs, ...this.originalAlgs];
     this.newAlg = "";
+  }
+
+  isCustomAlg(alg: string): boolean {
+    const storageKey = `alg-custom-${this.cubeId}-${this.setId}-${this.algId}`;
+    const saved = localStorage.getItem(storageKey);
+    if (!saved) return false;
+
+    try {
+      const customAlgs: string[] = JSON.parse(saved);
+      return customAlgs.includes(alg);
+    } catch {
+      return false;
+    }
+  }
+
+  removeAlgorithm(alg: string) {
+    const storageKey = `alg-custom-${this.cubeId}-${this.setId}-${this.algId}`;
+    const saved = localStorage.getItem(storageKey);
+    if (!saved) return;
+
+    let customAlgs: string[] = JSON.parse(saved);
+    customAlgs = customAlgs.filter((a) => a !== alg);
+    localStorage.setItem(storageKey, JSON.stringify(customAlgs));
+
+    this.algData.algs = [...customAlgs, ...this.originalAlgs];
+  }
+
+  isString(value: any): value is string {
+    return typeof value === "string";
+  }
+
+  isArray(value: any): value is string[] {
+    return Array.isArray(value);
   }
 }

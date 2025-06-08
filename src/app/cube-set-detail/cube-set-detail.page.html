@@ -9,9 +9,22 @@
       class="case-card"
       (click)="goToAlgorithm(case.id)"
     >
-    <mat-card-content>
+      <mat-card-content>
         <mat-card-title>{{ case.name }}</mat-card-title>
-        <img *ngIf="case.image" [src]="case.image" alt="{{ case.name }}" />
+        <img
+          *ngIf="isString(case.image)"
+          [src]="case.image"
+          alt="{{ case.name }}"
+        />
+
+        <ng-container *ngIf="isArray(case.image)">
+          <img
+            *ngFor="let img of case.image"
+            [src]="img"
+            [alt]="case.name"
+            style="margin-top: 8px"
+          />
+        </ng-container>
         <p>{{ getPreviewAlg(case.id, case.algs) }}</p>
       </mat-card-content>
     </mat-card>
