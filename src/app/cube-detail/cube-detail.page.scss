@@ -18,3 +18,39 @@
   text-align: center;
   color: red;
 }
+
+.sets-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 56px;
+}
+
+.sets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  overflow-y: auto;
+  padding: 16px;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.cube-card {
+  cursor: pointer;
+}
+
+mat-toolbar {
+  padding: 16px;
+}
+
+mat-card-title {
+  font-size: 16px;
+  text-align: center;
+  font-weight: 500;
+}
+
+mat-card-content p {
+  text-align: center;
+}

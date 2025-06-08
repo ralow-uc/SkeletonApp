@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span #tituloHome>Bienvenido, {{ username }}</span>
+  <span #tituloHome>Bienvenido {{ username }}</span>
 </mat-toolbar>
 
 <div class="home-wrapper">
@@ -15,13 +15,10 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Nivel de educación</mat-label>
-      <mat-select [(ngModel)]="nivel" name="nivel">
-        <mat-option
-          *ngFor="let nivelOption of nivelesEducacion"
-          [value]="nivelOption"
-        >
-          {{ nivelOption }}
+      <mat-label>Cubo favorito</mat-label>
+      <mat-select [(ngModel)]="cuboFavorito" name="cuboFavorito">
+        <mat-option *ngFor="let cube of cubosDisponibles" [value]="cube.name">
+          {{ cube.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>

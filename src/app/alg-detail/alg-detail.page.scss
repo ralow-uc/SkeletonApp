@@ -1,0 +1,91 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.alg-detail-container {
+  padding: 16px;
+  min-height: calc(100vh - 56px);
+  box-sizing: border-box;
+}
+
+.alg-detail-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.alg-detail-content img {
+  max-width: 200px;
+  margin: 16px auto;
+  display: block;
+}
+
+.alg-detail-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.alg-detail-content li {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+mat-toolbar {
+  padding: 16px;
+}
+
+.alg-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.alg-form {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 12px 0;
+  transform-origin: top;
+}
+
+.alg-detail-content {
+  transition: transform 300ms ease, margin-top 300ms ease;
+}
+
+.alg-detail-content.shifted {
+  margin-top: 12px;
+  transform: translateY(10px);
+}
+
+.alg-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.delete-button {
+  width: 24px;
+  height: 24px;
+  min-width: unset;
+  padding: 0;
+  mat-icon {
+    font-size: 16px;
+  }
+}
+
+.alg-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.alg-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

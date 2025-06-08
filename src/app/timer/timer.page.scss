@@ -1,17 +1,29 @@
-.timer-content {
+.full-wrapper {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   text-align: center;
 }
 
 .timer-display h1 {
   font-size: 5rem;
-  margin-bottom: 1rem;
+  margin: 0;
+  font-weight: bold;
 }
 
 .timer-display p {
-  font-size: 1.5rem;
-  color: gray;
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+.full-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 56px;
+  box-sizing: border-box;
 }

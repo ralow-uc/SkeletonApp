@@ -17,7 +17,7 @@ export class HomePage implements AfterViewInit {
   username = "";
   nombre = "";
   apellido = "";
-  nivel = "";
+  cuboFavorito = "";
   fechaNacimiento: string | null = null;
 
   @ViewChild("nombreInput", { read: ElementRef }) nombreInputRef!: ElementRef;
@@ -30,12 +30,9 @@ export class HomePage implements AfterViewInit {
     this.username = nav?.extras.state?.["username"] || "";
   }
 
-  nivelesEducacion: string[] = [
-    "Educación básica",
-    "Educación media",
-    "Técnico profesional",
-    "Universitaria",
-    "Postgrado",
+  cubosDisponibles = [
+    { name: "3x3" },
+    { name: "Square-1" },
   ];
 
   ngAfterViewInit(): void {
@@ -57,7 +54,7 @@ export class HomePage implements AfterViewInit {
   limpiar() {
     this.nombre = "";
     this.apellido = "";
-    this.nivel = "";
+    this.cuboFavorito = "";
     this.fechaNacimiento = null;
 
     this.animar(this.nombreInputRef.nativeElement);

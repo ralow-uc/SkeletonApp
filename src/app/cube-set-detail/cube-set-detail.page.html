@@ -2,10 +2,31 @@
   <span>{{ setData?.name || 'Set de algoritmos' }}</span>
 </mat-toolbar>
 
-<mat-card *ngFor="let case of setData.cases" class="case-card" (click)="goToAlgorithm(case.id)">
-  <mat-card-title>{{ case.name }}</mat-card-title>
-  <mat-card-content>
-    <p>{{ case.notation }}</p>
-    <img *ngIf="case.image" [src]="case.image" alt="{{ case.name }}" />
-  </mat-card-content>
-</mat-card>
+<div class="case-container">
+  <div class="case-grid">
+    <mat-card
+      *ngFor="let case of setData.cases"
+      class="case-card"
+      (click)="goToAlgorithm(case.id)"
+    >
+      <mat-card-content>
+        <mat-card-title>{{ case.name }}</mat-card-title>
+        <img
+          *ngIf="isString(case.image)"
+          [src]="case.image"
+          alt="{{ case.name }}"
+        />
+
+        <ng-container *ngIf="isArray(case.image)">
+          <img
+            *ngFor="let img of case.image"
+            [src]="img"
+            [alt]="case.name"
+            style="margin-top: 8px"
+          />
+        </ng-container>
+        <p>{{ getPreviewAlg(case.id, case.algs) }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
