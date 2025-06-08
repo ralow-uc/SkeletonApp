@@ -39,7 +39,12 @@
       <button mat-raised-button color="accent" (click)="limpiar()">
         Limpiar
       </button>
-      <button mat-raised-button color="primary" (click)="mostrar()">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="mostrar()"
+        [disabled]="!formularioCompleto()"
+      >
         Mostrar
       </button>
     </div>
