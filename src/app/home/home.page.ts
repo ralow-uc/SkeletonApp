@@ -30,10 +30,7 @@ export class HomePage implements AfterViewInit {
     this.username = nav?.extras.state?.["username"] || "";
   }
 
-  cubosDisponibles = [
-    { name: "3x3" },
-    { name: "Square-1" },
-  ];
+  cubosDisponibles = [{ name: "3x3" }, { name: "Square-1" }];
 
   ngAfterViewInit(): void {
     const el = this.tituloHomeRef.nativeElement;
@@ -69,7 +66,22 @@ export class HomePage implements AfterViewInit {
     }, 50);
   }
 
+  formularioCompleto(): boolean {
+    return (
+      this.nombre.trim() !== "" &&
+      this.apellido.trim() !== "" &&
+      this.cuboFavorito !== "" &&
+      this.fechaNacimiento !== null
+    );
+  }
+
   mostrar() {
-    alert(`Nombre: ${this.nombre} ${this.apellido}`);
+    const fechaFormateada = this.fechaNacimiento
+      ? new Date(this.fechaNacimiento).toISOString().split("T")[0]
+      : "";
+
+    alert(
+      `Nombre: ${this.nombre} ${this.apellido}\nCubo favorito: ${this.cuboFavorito}\nFecha de nacimiento: ${fechaFormateada}`
+    );
   }
 }
