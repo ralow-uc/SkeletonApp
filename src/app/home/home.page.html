@@ -6,12 +6,12 @@
   <div class="material-container">
     <mat-form-field appearance="fill">
       <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="nombre" #nombreInput />
+      <input matInput [(ngModel)]="nombre" #nombreInput name="nombre" />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Apellido</mat-label>
-      <input matInput [(ngModel)]="apellido" #apellidoInput />
+      <input matInput [(ngModel)]="apellido" #apellidoInput name="apellido" />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -36,16 +36,16 @@
     </mat-form-field>
 
     <div class="buttons">
-      <button mat-raised-button color="accent" (click)="limpiar()">
-        Limpiar
+      <button mat-raised-button color="accent" (click)="cerrarSesion()">
+        Cerrar sesión
       </button>
       <button
         mat-raised-button
-        color="primary"
-        (click)="mostrar()"
+        color="warn"
+        (click)="guardarCambios()"
         [disabled]="!formularioCompleto()"
       >
-        Mostrar
+        Guardar
       </button>
     </div>
   </div>

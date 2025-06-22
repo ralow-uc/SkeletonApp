@@ -3,7 +3,7 @@
 </mat-toolbar>
 
 <div class="login-wrapper" #loginWrapper>
-  <form (ngSubmit)="onSubmit()" novalidate class="login-form">
+  <form (ngSubmit)="onSubmit()" class="login-form">
     <mat-form-field appearance="fill">
       <mat-label>Usuario</mat-label>
       <input
@@ -12,8 +12,6 @@
         [(ngModel)]="username"
         name="username"
         required
-        minlength="3"
-        maxlength="8"
       />
     </mat-form-field>
 
@@ -25,18 +23,13 @@
         [(ngModel)]="password"
         name="password"
         required
-        maxlength="4"
-        inputmode="numeric"
       />
     </mat-form-field>
 
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      class="login-button"
-    >
-      Ingresar
+    <button mat-raised-button color="primary" type="submit">Ingresar</button>
+
+    <button mat-button color="accent" type="button" (click)="goToRegister()">
+      Crear cuenta
     </button>
   </form>
 </div>

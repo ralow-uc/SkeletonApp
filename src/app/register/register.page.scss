@@ -1,0 +1,20 @@
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px);
+  padding: 0 16px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.register-button {
+  align-self: center;
+  width: 100%;
+  max-width: 300px;
+}
