@@ -1,18 +1,20 @@
-<mat-toolbar color="primary">
-  <span>{{ cubeData?.name || 'Set de algoritmos' }}</span>
-</mat-toolbar>
+<ion-content class="ion-padding-top">
+  <mat-toolbar color="primary">
+    <span>{{ cubeData?.name || 'Set de algoritmos' }}</span>
+  </mat-toolbar>
 
-<div class="sets-container">
-  <div class="sets-grid">
-    <mat-card
-      *ngFor="let set of cubeData?.sets"
-      class="cube-card"
-      (click)="goToSet(set.id)"
-    >
-      <mat-card-content>
-        <mat-card-title>{{ set.name }}</mat-card-title>
-        <img mat-card-image [src]="set.image" alt="{{ set.name }}" />
-      </mat-card-content>
-    </mat-card>
+  <div class="sets-container">
+    <div class="sets-grid">
+      <mat-card
+        *ngFor="let set of cubeData?.sets"
+        class="cube-card"
+        (click)="goToSet(set.id)"
+      >
+        <mat-card-content>
+          <mat-card-title>{{ set.name }}</mat-card-title>
+          <img mat-card-image [src]="set.image" alt="{{ set.name }}" />
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-</div>
+</ion-content>

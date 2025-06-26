@@ -1,5 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
+import { CubeSQLiteService } from "src/services/sqlite-db.service";
+import { UserStoreService } from "src/services/user-store.service";
 
 @Component({
   selector: "app-login",
@@ -13,27 +15,52 @@ export class LoginPage {
 
   @ViewChild("loginWrapper", { read: ElementRef }) loginWrapperRef!: ElementRef;
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private dbService: CubeSQLiteService,
+    private userStore: UserStoreService
+  ) {}
 
-  onSubmit() {
-    const usernameValid = /^[a-zA-Z0-9]{3,8}$/.test(this.username);
-    const passwordValid = /^[0-9]{4}$/.test(this.password);
+  async ngOnInit() {
+    await this.dbService.initDB();
+  }
 
-    if (usernameValid && passwordValid) {
-      // Aplica animación antes de navegar
-      const element = this.loginWrapperRef.nativeElement;
+  async onSubmit() {
+    const valid = await this.dbService.validateLogin(
+      this.username,
+      this.password
+    );
 
-      this.renderer.setStyle(element, "transition", "transform 0.5s ease");
-      this.renderer.setStyle(element, "transform", "translateX(-100vw)");
+    if (valid) {
+      const userData = await this.dbService.getUserByUsername(this.username);
 
-      setTimeout(() => {
-        this.router.navigate(["/tabs/tab1"], {
-          state: { username: this.username },
-          replaceUrl: true,
+      if (userData) {
+        this.userStore.setUser({
+          username: this.username,
+          ...userData,
         });
-      }, 500); // esperar a que termine la animación
+
+        localStorage.setItem("loggedUser", this.username);
+
+        const element = this.loginWrapperRef.nativeElement;
+        this.renderer.setStyle(element, "transition", "transform 0.5s ease");
+        this.renderer.setStyle(element, "transform", "translateX(-100vw)");
+
+        setTimeout(() => {
+          this.router.navigate(["/tabs/tab1"], {
+            replaceUrl: true,
+          });
+        }, 500);
+      } else {
+        alert("No se encontraron datos del usuario.");
+      }
     } else {
       alert("Usuario o contraseña inválidos");
     }
+  }
+
+  goToRegister() {
+    this.router.navigate(["/register"]);
   }
 }

@@ -1,32 +1,34 @@
-<mat-toolbar color="primary">
-  <span>{{ setData?.name || 'Set de algoritmos' }}</span>
-</mat-toolbar>
+<ion-content class="ion-padding-top">
+  <mat-toolbar color="primary">
+    <span>{{ setData?.name || 'Set de algoritmos' }}</span>
+  </mat-toolbar>
 
-<div class="case-container">
-  <div class="case-grid">
-    <mat-card
-      *ngFor="let case of setData.cases"
-      class="case-card"
-      (click)="goToAlgorithm(case.id)"
-    >
-      <mat-card-content>
-        <mat-card-title>{{ case.name }}</mat-card-title>
-        <img
-          *ngIf="isString(case.image)"
-          [src]="case.image"
-          alt="{{ case.name }}"
-        />
-
-        <ng-container *ngIf="isArray(case.image)">
+  <div class="case-container">
+    <div class="case-grid">
+      <mat-card
+        *ngFor="let case of setData.cases"
+        class="case-card"
+        (click)="goToAlgorithm(case.id)"
+      >
+        <mat-card-content>
+          <mat-card-title>{{ case.name }}</mat-card-title>
           <img
-            *ngFor="let img of case.image"
-            [src]="img"
-            [alt]="case.name"
-            style="margin-top: 8px"
+            *ngIf="isString(case.image)"
+            [src]="case.image"
+            alt="{{ case.name }}"
           />
-        </ng-container>
-        <p>{{ getPreviewAlg(case.id, case.algs) }}</p>
-      </mat-card-content>
-    </mat-card>
+
+          <ng-container *ngIf="isArray(case.image)">
+            <img
+              *ngFor="let img of case.image"
+              [src]="img"
+              [alt]="case.name"
+              style="margin-top: 8px"
+            />
+          </ng-container>
+          <p>{{ getPreviewAlg(case.id, case.algs) }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-</div>
+</ion-content>

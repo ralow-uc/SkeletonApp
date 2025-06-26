@@ -13,6 +13,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { HomePageRoutingModule } from "./home-routing.module";
 
 import { HomePage } from "./home.page";
+import { IonicModule } from "@ionic/angular";
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { HomePage } from "./home.page";
     MatNativeDateModule,
     MatToolbarModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    IonicModule
   ],
   declarations: [HomePage],
 })

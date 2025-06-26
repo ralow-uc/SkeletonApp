@@ -1,12 +1,14 @@
-<mat-toolbar color="primary">
-  <span>Timer</span>
-</mat-toolbar>
+<ion-content class="ion-padding-top">
+  <mat-toolbar color="primary">
+    <span>Timer</span>
+  </mat-toolbar>
 
-<ion-content>
-  <div class="full-wrapper" (click)="toggleTimer()">
-    <div class="timer-display">
-      <h1>{{ formattedTime }}</h1>
-      <p>{{ running ? 'Toca para detener' : 'Toca para comenzar' }}</p>
+  <ion-content>
+    <div class="full-wrapper" (click)="toggleTimer()">
+      <div class="timer-display">
+        <h1>{{ formattedTime }}</h1>
+        <p>{{ running ? 'Toca para detener' : 'Toca para comenzar' }}</p>
+      </div>
     </div>
-  </div>
+  </ion-content>
 </ion-content>
