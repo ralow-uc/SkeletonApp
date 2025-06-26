@@ -1,52 +1,61 @@
-<mat-toolbar color="primary">
-  <span #tituloHome>Bienvenido {{ username }}</span>
-</mat-toolbar>
+<ion-content class="ion-padding-top">
+  <mat-toolbar color="primary">
+    <span #tituloHome>Bienvenido {{ username }}</span>
+  </mat-toolbar>
 
-<div class="home-wrapper">
-  <div class="material-container">
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="nombre" #nombreInput name="nombre" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Apellido</mat-label>
-      <input matInput [(ngModel)]="apellido" #apellidoInput name="apellido" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Cubo favorito</mat-label>
-      <mat-select [(ngModel)]="cuboFavorito" name="cuboFavorito">
-        <mat-option *ngFor="let cube of cubosDisponibles" [value]="cube.name">
-          {{ cube.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="custom-datepicker">
-      <mat-label>Fecha de nacimiento</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        [(ngModel)]="fechaNacimiento"
-        name="fechaNacimiento"
-      />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <div class="buttons">
-      <button mat-raised-button color="accent" (click)="cerrarSesion()">
-        Cerrar sesión
-      </button>
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="guardarCambios()"
-        [disabled]="!formularioCompleto()"
-      >
-        Guardar
+  <div class="home-wrapper">
+    <div class="profile-wrapper">
+      <img [src]="profilePhoto" class="profile-photo" />
+      <button mat-stroked-button color="primary" (click)="tomarFotoPerfil()">
+        Tomar foto de perfil
       </button>
     </div>
+
+    <div class="material-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="nombre" #nombreInput name="nombre" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="apellido" #apellidoInput name="apellido" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cubo favorito</mat-label>
+        <mat-select [(ngModel)]="cuboFavorito" name="cuboFavorito">
+          <mat-option *ngFor="let cube of cubosDisponibles" [value]="cube.name">
+            {{ cube.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="custom-datepicker">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="fechaNacimiento"
+          name="fechaNacimiento"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button mat-raised-button color="accent" (click)="cerrarSesion()">
+          Cerrar sesión
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="guardarCambios()"
+          [disabled]="!formularioCompleto()"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
   </div>
-</div>
+</ion-content>

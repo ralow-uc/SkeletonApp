@@ -9,6 +9,8 @@ import {
 import { Router } from "@angular/router";
 import { CubeSQLiteService } from "src/services/sqlite-db.service";
 import { UserStoreService } from "src/services/user-store.service";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { Capacitor } from "@capacitor/core";
 
 @Component({
   selector: "app-home",
@@ -22,6 +24,8 @@ export class HomePage implements OnInit, AfterViewInit {
   apellido = "";
   cuboFavorito = "";
   fechaNacimiento: string | null = null;
+  profilePhoto: string = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541";
+  private fotoTomada = false;
 
   cubosDisponibles = [{ name: "3x3" }, { name: "Square-1" }];
 
@@ -129,5 +133,30 @@ export class HomePage implements OnInit, AfterViewInit {
     localStorage.removeItem("loggedUser");
     await this.dbService.closeConnection();
     this.router.navigate(["/login"], { replaceUrl: true });
+  }
+
+  async tomarFotoPerfil() {
+    if (Capacitor.getPlatform() === "web") {
+      alert(
+        "Función no soportada en navegador/emulador. Usa un dispositivo real."
+      );
+      return;
+    }
+
+    try {
+      const image = await Camera.getPhoto({
+        quality: 80,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera,
+      });
+
+      if (image?.dataUrl) {
+        this.profilePhoto = image.dataUrl;
+        this.fotoTomada = true;
+      }
+    } catch (error) {
+      console.log("Error al tomar foto:", error);
+    }
   }
 }
