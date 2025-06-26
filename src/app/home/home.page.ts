@@ -4,10 +4,11 @@ import {
   Renderer2,
   ViewChild,
   AfterViewInit,
+  OnInit,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { CubeSQLiteService } from "src/services/sqlite-db.service";
-import { OnInit } from "@angular/core";
+import { UserStoreService } from "src/services/user-store.service";
 
 @Component({
   selector: "app-home",
@@ -32,37 +33,26 @@ export class HomePage implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private renderer: Renderer2,
-    private dbService: CubeSQLiteService
+    private dbService: CubeSQLiteService,
+    private userStore: UserStoreService
   ) {}
 
   async ngOnInit() {
     await this.dbService.initDB();
 
-    this.username = localStorage.getItem("loggedUser") || "";
-    console.log("Usuario logeadoOOOOOOOOOOOO:", this.username);
-
-    if (this.username) {
-      const data = await this.dbService.getUserByUsername(this.username);
-      console.log("Datos obtenidos:", data);
-
-      if (data) {
-        this.nombre = data.nombre;
-        this.apellido = data.apellido;
-        this.cuboFavorito = data.cuboFavorito;
-        this.fechaNacimiento = data.fechaNacimiento;
+    this.userStore.user$.subscribe((user) => {
+      if (user) {
+        this.username = user.username;
+        this.nombre = user.nombre;
+        this.apellido = user.apellido;
+        this.cuboFavorito = user.cuboFavorito;
+        this.fechaNacimiento = user.fechaNacimiento;
       }
-    }
+    });
   }
 
-  async cargarDatosUsuario() {
-    if (!this.username) return;
-    const data = await this.dbService.getUserByUsername(this.username);
-    if (data) {
-      this.nombre = data.nombre;
-      this.apellido = data.apellido;
-      this.cuboFavorito = data.cuboFavorito;
-      this.fechaNacimiento = data.fechaNacimiento;
-    }
+  ngAfterViewInit(): void {
+    this.animarTitulo();
   }
 
   animarTitulo() {
@@ -74,32 +64,20 @@ export class HomePage implements OnInit, AfterViewInit {
       "transition",
       "opacity 1s ease, transform 1s ease"
     );
-
     setTimeout(() => {
       this.renderer.setStyle(el, "opacity", "1");
       this.renderer.setStyle(el, "transform", "translateY(0)");
     }, 100);
   }
 
-  ngAfterViewInit(): void {
-    this.animarTitulo();
-  }
-
-  async cerrarSesion() {
-    const confirmar = confirm("¿Estás seguro de que deseas cerrar sesión?");
-    if (!confirmar) return;
-
-    this.username = "";
+  limpiar() {
     this.nombre = "";
     this.apellido = "";
     this.cuboFavorito = "";
     this.fechaNacimiento = null;
 
-    localStorage.removeItem("loggedUser");
-    
-    await this.dbService.closeConnection();
-
-    this.router.navigate(["/login"], { replaceUrl: true });
+    this.animar(this.nombreInputRef.nativeElement);
+    this.animar(this.apellidoInputRef.nativeElement);
   }
 
   animar(element: HTMLElement) {
@@ -130,9 +108,26 @@ export class HomePage implements OnInit, AfterViewInit {
     });
 
     if (success) {
+      this.userStore.setUser({
+        username: this.username,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        cuboFavorito: this.cuboFavorito,
+        fechaNacimiento: this.fechaNacimiento || "",
+      });
       alert("Cambios guardados correctamente");
     } else {
       alert("Hubo un error al guardar los cambios");
     }
+  }
+
+  async cerrarSesion() {
+    const confirmar = confirm("¿Estás seguro de que deseas cerrar sesión?");
+    if (!confirmar) return;
+
+    this.userStore.clearUser();
+    localStorage.removeItem("loggedUser");
+    await this.dbService.closeConnection();
+    this.router.navigate(["/login"], { replaceUrl: true });
   }
 }

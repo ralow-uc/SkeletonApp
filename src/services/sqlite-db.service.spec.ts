@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SqliteDBService } from './sqlite-db.service';
+import { CubeSQLiteService } from './sqlite-db.service';
 
 describe('SqliteDBService', () => {
-  let service: SqliteDBService;
+  let service: CubeSQLiteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SqliteDBService);
+    service = TestBed.inject(CubeSQLiteService);
   });
 
   it('should be created', () => {
