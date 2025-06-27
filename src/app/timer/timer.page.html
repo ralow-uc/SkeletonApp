@@ -2,13 +2,12 @@
   <mat-toolbar color="primary">
     <span>Timer</span>
   </mat-toolbar>
+  <p *ngIf="fact" class="fact-text">{{ fact }}</p>
 
-  <ion-content>
-    <div class="full-wrapper" (click)="toggleTimer()">
-      <div class="timer-display">
-        <h1>{{ formattedTime }}</h1>
-        <p>{{ running ? 'Toca para detener' : 'Toca para comenzar' }}</p>
-      </div>
+  <div class="full-wrapper" (click)="toggleTimer()">
+    <div class="timer-display">
+      <h1>{{ formattedTime }}</h1>
+      <p>{{ running ? 'Toca para detener' : 'Toca para comenzar' }}</p>
     </div>
-  </ion-content>
+  </div>
 </ion-content>
