@@ -23,7 +23,7 @@
   gap: 16px;
   padding: 16px;
   overflow-y: auto;
-  max-height: calc(100vh - 56px);
+  max-height: calc(100vh - 100px);
   box-sizing: border-box;
 }
 
@@ -50,6 +50,10 @@
 
 mat-toolbar {
   padding: 16px;
+}
+
+mat-card {
+  height: 100%;
 }
 
 mat-card-title {
