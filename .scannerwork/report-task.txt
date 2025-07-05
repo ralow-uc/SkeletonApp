@@ -1,0 +1,6 @@
+projectKey=skeletonapp
+serverUrl=http://localhost:9000
+serverVersion=25.6.0.109173
+dashboardUrl=http://localhost:9000/dashboard?id=skeletonapp
+ceTaskId=afa274bb-2cf5-4634-b94d-f4ff5aa3e969
+ceTaskUrl=http://localhost:9000/api/ce/task?id=afa274bb-2cf5-4634-b94d-f4ff5aa3e969
