@@ -28,17 +28,18 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/app'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ]
+        { type: "html" },
+        { type: "text-summary" },
+        { type: "lcov" },
+      ],
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ["progress", "kjhtml"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ["Chrome"],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
   });
 };
